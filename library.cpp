@@ -54,26 +54,27 @@ void Library::registerLibrarian()
     std::cout << "Librarian registered. Librarian ID: " << id << std::endl;
 }
 
-bool Library::loginLibrarian(int librarianId, const std::string &password)
+bool Library::loginLibrarian(int librarianId)
 {
     bool failure = true;
     for (int i = 0; i < librarians.size(); i++)
     {
-        if (librarianId == librarians[i].getStaffID() && password == librarians[i].getPassword())
+        if (librarianId == librarians[i].getStaffID())
         {
             std::cout << "Login successfull!" << std::endl;
             failure = false;
-            break;
+            options();
         }
     }
     if (failure)
     {
         std::cout << "Login failed!" << std::endl;
+        options();
     }
     return failure;
 }
 
-void Library::saveLibrarianDataToFile(std::string &filename)
+void Library::saveLibrarianDataToFile(std::string filename)
 {
     // Implementation here
     std::ofstream outputFile(filename, std::ios::app);
@@ -89,7 +90,6 @@ void Library::saveLibrarianDataToFile(std::string &filename)
         outputFile << "=========================================\n";
         outputFile << "ID: " << librarian.getStaffID() << std::endl;
         outputFile << "Name: " << librarian.getName() << std::endl;
-        outputFile << "Password: " << librarian.getPassword() << std::endl;
         outputFile << "--------------------------------------" << std::endl;
     }
     std::cout << "Librarian data saved to file: " << filename << std::endl;
@@ -193,10 +193,7 @@ void Library::options()
             std::cout << "Enter Librarian ID: ";
             std::cin >> librarianId;
 
-            std::cout << "Enter Password: ";
-            std::cin >> password;
-
-            if (mylibrary.loginLibrarian(librarianId, password))
+            if (mylibrary.loginLibrarian(librarianId))
             {
                 std::cout << "Login successful!" << std::endl;
                 // Set the loggedInLibrarian to the logged-in librarian
@@ -294,8 +291,12 @@ void Library::loadBooksFromFile(std::string filename)
         failed = true;
         return;
     }
+    
+    std::string line = "";
+  
+    std::getline(file, line);
+    line = "";
 
-    std::string line;
     while (std::getline(file, line)) {
 
         std::istringstream iss(line);
@@ -311,7 +312,7 @@ void Library::loadBooksFromFile(std::string filename)
         std::getline(iss, authorFirstName, ',');
         std::getline(iss, authorLastName, ',');
         std::getline(iss, bookType, ',');
-
+ 
          // Iterate over characters in the line
         for (char c : line) {
             if (c == ',') {

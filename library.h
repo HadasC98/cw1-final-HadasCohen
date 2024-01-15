@@ -36,9 +36,9 @@ class Library
         //Registration
         void registerLibrarian();
         //Login
-        bool loginLibrarian(int librarianId, const std::string &password);
+        bool loginLibrarian(int librarianId);
         //Saving librarian details in file
-        void saveLibrarianDataToFile(std::string &filename);
+        void saveLibrarianDataToFile(std::string filename);
         //Checking if librarian exists, it wont save the same librarian twice 
         bool isLibrarianExist(Librarian librarian, std::string filename);
 };
