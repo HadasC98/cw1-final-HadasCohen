@@ -22,6 +22,14 @@ int main()
 
     Library myLibrary(newLibrarian);
 
+    //Enter the filename
+    std::cout << "Enter the filename of the CSV file: ";
+    std::string filename;
+    std::cin >> filename;
+
+    // Load books from the specified file
+    myLibrary.loadBooksFromFile(filename);
+
     myLibrary.options();
 
     return 0;

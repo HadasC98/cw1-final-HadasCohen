@@ -25,12 +25,19 @@ class Library
 
     public:
         Library();
+        //Constructor
         Library(Librarian &librarian);
+        //librarian options : here the librarian registers/logs in and 
         void options();
+        void loadBooksFromFile(std::string filename);
         Librarian getLibrarianById(int librarianId);
+        //Registration
         void registerLibrarian();
+        //Login
         bool loginLibrarian(int librarianId, const std::string &password);
+        //Saving librarian details in file
         void saveLibrarianDataToFile(std::string &filename);
+        //Checking if librarian exists, it wont save the same librarian twice 
         bool isLibrarianExist(Librarian librarian, std::string filename);
 };
 

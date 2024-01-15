@@ -1,5 +1,5 @@
 #include "person.h"
-//#include "include/library.h"
+// #include "include/library.h"
 #include <string>
 #include <vector>
 #include <iostream>
@@ -15,8 +15,6 @@
     Created: 23/12/2023
     Updated: 15/01/2024
 */
-
-
 
 void Book::setBookId(int bId)
 {
@@ -40,7 +38,7 @@ std::string Book::getAuthorLastName()
 {
     return authorLastName;
 }
-// Function sets due date
+
 void Book::setDueDate(std::chrono::system_clock::time_point newDueDate)
 {
     dueDate = newDueDate;
@@ -51,26 +49,32 @@ std::chrono::system_clock::time_point Book::getDueDate()
 }
 void Book::setBorrowed(bool borrowed)
 {
-    isBorrowed = borrowed; 
+    isBorrowed = borrowed;
 }
 void Book::returnBook()
 {
-    if (isBorrowed) {
+    if (isBorrowed)
+    {
         isBorrowed = false;
         std::cout << "Book returned successfully." << std::endl;
-    } else {
+    }
+    else
+    {
         std::cout << "Error: The book is not checked out." << std::endl;
     }
 }
 
 void Book::borrowBook(std::string borrower, std::chrono::system_clock::time_point dueDate)
 {
-    if (!isBorrowed) {
+    if (!isBorrowed)
+    {
         isBorrowed = true;
         this->borrower = std::move(borrower);
         this->dueDate = dueDate;
         std::cout << "Book borrowed successfully." << std::endl;
-    } else {
+    }
+    else
+    {
         std::cout << "Sorry! Choose a different book: The book is already borrowed." << std::endl;
     }
 }

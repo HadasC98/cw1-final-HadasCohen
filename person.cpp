@@ -255,43 +255,6 @@ std::string Librarian::getPassword()
 {
     return password;
 }
-// void Librarian::readDataFromCSV(std::string filename)
-// {
-//     std::ifstream file(filename);
-//     if (!file.is_open())
-//     {
-//         std::cerr << "Error opening file: " << filename << std::endl;
-//         return;
-//     }
-
-//     std::string line;
-//     while (std::getline(file, line))
-//     {
-//         std::istringstream iss(line);
-//         std::string token;
-
-//         // Assuming CSV format: id,bookName,pageCount,authorFirstName,authorLastName,bookType
-//         int id, pageCount;
-//         std::string bookName, authorFirstName, authorLastName, bookType;
-
-//         std::getline(iss, token, ',');
-//         id = std::stoi(token);
-//         std::getline(iss, id, ',');
-//         std::getline(iss, bookName, ',');
-//         std::getline(iss, pageCount, ',');
-//         std::getline(iss, authorFirstName, ',');
-//         std::getline(iss, authorLastName, ',');
-//         std::getline(iss, bookType, ',');
-
-//         std::getline(iss, token, ',');
-//         pageCount = std::stoi(token);
-
-//         Book book(id, bookName, authorFirstName, authorLastName);
-//         books.push_back(book);
-//     }
-
-//     file.close();
-// }
 
 Member::Member(int id, std::string memberName, std::string memberAddress, std::string memberEmail)
     : memberId(id) // Initialize memberId in the initializer list
