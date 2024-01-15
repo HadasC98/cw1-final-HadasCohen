@@ -63,17 +63,17 @@ void Book::returnBook()
     }
 }
 
-// void Book::borrowBook(std::string borrower, std::chrono::system_clock::time_point dueDate)
-// {
-//     if (!isBorrowed) {
-//         isBorrowed = true;
-//         this->borrower = std::move(borrower);
-//         this->dueDate = dueDate;
-//         std::cout << "Book borrowed successfully." << std::endl;
-//     } else {
-//         std::cout << "Sorry! Choose a different book: The book is already borrowed." << std::endl;
-//     }
-// }
+void Book::borrowBook(std::string borrower, std::chrono::system_clock::time_point dueDate)
+{
+    if (!isBorrowed) {
+        isBorrowed = true;
+        this->borrower = std::move(borrower);
+        this->dueDate = dueDate;
+        std::cout << "Book borrowed successfully." << std::endl;
+    } else {
+        std::cout << "Sorry! Choose a different book: The book is already borrowed." << std::endl;
+    }
+}
 
 Book::Book(int id, std::string bName, std::string aFirstName, std::string aLastName)
 {

@@ -31,12 +31,11 @@ private:
 
 public:
   int pageCount;
-  //Book(int id, std::string bookName) : bookId(id), bookName(std::move(bookName)), isBorrowed(false) {}
+  Book(int id, std::string bookName) : bookId(id), bookName(std::move(bookName)), isBorrowed(false) {}
   Book(int id,std::string bName,std::string aFirstName, std::string aLastName);
   //void readDataFromCSV(std::string filename);
   void setBookId(int bId);
   int getBookId();
-  //void setAvailable(bool available);
   std::string getBookName();
   std::string getAuthorFirstName();
   std::string getAuthorLastName();
@@ -45,7 +44,7 @@ public:
   std::chrono::system_clock::time_point getDueDate();
   void setBorrowed(bool isBorrowed);
   void returnBook();
-  //void borrowBook(std::string borrower,std::chrono::system_clock::time_point dueDate);
+  void borrowBook(std::string borrower,std::chrono::system_clock::time_point dueDate);
 };
 
 #endif
