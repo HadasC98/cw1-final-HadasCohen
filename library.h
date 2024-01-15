@@ -24,11 +24,13 @@ class Library
         std::vector<Book> books;
 
     public:
+        bool failed;
         Library();
         //Constructor
         Library(Librarian &librarian);
         //librarian options : here the librarian registers/logs in and 
         void options();
+        void ignoreCommas();
         void loadBooksFromFile(std::string filename);
         Librarian getLibrarianById(int librarianId);
         //Registration

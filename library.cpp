@@ -96,10 +96,9 @@ void Library::saveLibrarianDataToFile(std::string &filename)
 
     outputFile.close();
 }
-
+//
 bool Library::isLibrarianExist(Librarian librarian, std::string filename)
 {
-    // Implementation here
     std::ifstream inputFile(filename);
 
     if (!inputFile.is_open())
@@ -140,9 +139,9 @@ Librarian Library::getLibrarianById(int librarianId)
 
 void Library::options()
 {
-    std::string librarianDataFile = "librarian_data.txt";
-    std::vector<Member> members; // Assuming you have a Member class
+    std::string librarianDataFile = "librarian_data.txt"; 
     std::string memberDataFile = "member_data.txt";
+    std::vector<Member> members;
     bool running = true;
     int choice, librarianId;
     std::string password;
@@ -190,6 +189,7 @@ void Library::options()
             break;
 
         case 2:
+            //once librarian is logged in they can select options
             std::cout << "Enter Librarian ID: ";
             std::cin >> librarianId;
 
@@ -202,17 +202,17 @@ void Library::options()
                 // Set the loggedInLibrarian to the logged-in librarian
                 loggedInLibrarian = mylibrary.getLibrarianById(librarianId);
 
-                // Now you might want to display more librarian-related options
                 // Switch statement here should handle options for the logged-in librarian
                 int librarianChoice;
                 std::cout << "Logged in as Librarian ID: " << loggedInLibrarian.getStaffID() << std::endl;
-                // std::cout << "1. Choose CSV File: " << std::endl;
-                std::cout << "2. Add Member" << std::endl;
-                std::cout << "3. Issue A Book" << std::endl;
-                std::cout << "4. Return A Book" << std::endl;
-                std::cout << "5. Display Borrowed Books" << std::endl;
-                std::cout << "6. Calculate A Fine" << std::endl;
-                std::cout << ". Logout" << std::endl;
+
+                //librarian options
+                std::cout << "1. Add Member" << std::endl;
+                std::cout << "2. Issue A Book" << std::endl;
+                std::cout << "3. Return A Book" << std::endl;
+                std::cout << "4. Display Borrowed Books" << std::endl;
+                std::cout << "5. Calculate A Fine" << std::endl;
+                std::cout << "6. Logout" << std::endl;
                 std::cout << "Enter your choice: ";
                 std::cin >> librarianChoice;
 
@@ -234,7 +234,7 @@ void Library::options()
                     std::cin >> selectedBookID;
                     selectedBookID--;
                     selectedMemberID--;
-                    loggedInLibrarian.issueBook(members[selectedMemberID].getMemberId(), books[selectedBookID].getBookId());
+                    loggedInLibrarian.issueBook(members[selectedMemberID - 1].getMemberId(), books[selectedBookID - 1].getBookId());
                     break;
                 case 3:
                     std::cout << "Enter Member ID: " << std::endl;
@@ -243,17 +243,17 @@ void Library::options()
                     std::cin >> selectedBookID;
                     selectedBookID--;
                     selectedMemberID--;
-                    loggedInLibrarian.returnBook(members[selectedMemberID].getMemberId(), books[selectedBookID].getBookId());
+                    loggedInLibrarian.returnBook(members[selectedMemberID - 1].getMemberId(), books[selectedBookID - 1].getBookId());
                 case 4:
                     std::cout << "Enter Member ID: " << std::endl;
                     std::cin >> selectedMemberID;
                     selectedMemberID--;
-                    loggedInLibrarian.diplayBorrowedBooks(members[selectedMemberID].getMemberId());
+                    loggedInLibrarian.diplayBorrowedBooks(members[selectedMemberID - 1].getMemberId());
                 case 5:
                     std::cout << "Enter Member ID: " << std::endl;
                     std::cin >> selectedMemberID;
                     selectedMemberID--;
-                    loggedInLibrarian.calcFine(members[selectedMemberID].getMemberId());
+                    loggedInLibrarian.calcFine(members[selectedMemberID - 1].getMemberId());
                 case 27:
                     std::cout << "Press Esc to logout..." << std::endl;
                     break;
@@ -281,37 +281,72 @@ void Library::options()
     }
 }
 
+void Library::ignoreCommas(){
+    
+}
+
 void Library::loadBooksFromFile(std::string filename)
 {
+    failed = false;
     std::ifstream file(filename);
     if (!file.is_open()) {
         std::cerr << "Error opening file: " << filename << std::endl;
+        failed = true;
         return;
     }
 
     std::string line;
     while (std::getline(file, line)) {
+
         std::istringstream iss(line);
         // Parse CSV line and create Book objects;
         // Read values from iss and create a Book object
-        std::string token;
 
         // Assuming CSV format: id,bookName,pageCount,authorFirstName,authorLastName,bookType
-        int id, pageCount;
-        std::string bookName, authorFirstName, authorLastName, bookType;
+        std::string strId, bookName, strPageCount, authorFirstName, authorLastName, bookType;
 
-        std::getline(iss, token, ',');
-        id = std::stoi(token);
+        std::getline(iss, strId, ',');
         std::getline(iss, bookName, ',');
-        std::getline(iss, token, ',');
-        pageCount = std::stoi(token);
+        std::getline(iss, strPageCount, ',');
         std::getline(iss, authorFirstName, ',');
         std::getline(iss, authorLastName, ',');
         std::getline(iss, bookType, ',');
 
-        Book book(id, bookName, authorFirstName, authorLastName);
-        books.push_back(book);
-    }
+         // Iterate over characters in the line
+        for (char c : line) {
+            if (c == ',') {
+                // Handle consecutive commas
+                if (strId.empty()) {
+                    strId = "0"; // Assuming default value for missing ID
+                }
+            } else {
+                // Append non-comma characters to respective strings
+                strId += c;
+                // Add additional checks for other fields
+            }
+        }
 
-    file.close();
+        try {
+            // Convert strings to integers, handling potential errors
+            int id = (strId.empty()) ? 0 : std::stoi(strId);
+            int pageCount = (strPageCount.empty()) ? 0 : std::stoi(strPageCount);
+
+            // Create Book object and add to the books vector
+            Book book(id, bookName, authorFirstName, authorLastName);
+            books.push_back(book);
+        } catch (const std::invalid_argument& e) {
+            // Handle the error, log a message, or skip the problematic line
+            std::cerr << "Error converting string to integer in line: " << line << std::endl;
+        } catch (const std::out_of_range& e) {
+            // Handle the out-of-range error
+            std::cerr << "Error: " << e.what() << " in line: " << line << std::endl;
+        }
+
+        file.close();
+
+    }
 }
+      
+
+
+
