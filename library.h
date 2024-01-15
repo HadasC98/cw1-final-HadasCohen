@@ -4,6 +4,8 @@
 #include <string>
 #include <vector>
 #include <algorithm>
+#include "book.h"
+#include "person.h"
 
 /*
     library.h
@@ -19,6 +21,7 @@ class Library
 {
     private:
         std::vector<Librarian> librarians;
+        std::vector<Book> books;
 
     public:
         Library();

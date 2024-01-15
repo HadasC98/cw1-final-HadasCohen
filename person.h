@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include "book.h"
 /*
     person.h
     Author: Hadas Cohen <hc820@live.mdx.ac.uk>
@@ -37,10 +38,11 @@ private:
         int staffId;
         std::string password;
         int salary;
-        std::vector<Member> members;
-        std::vector<Book> books;
+        
 
 public:
+    std::vector<Member> members;
+    std::vector<Book> books;
     Librarian(int id, std::string staffName, std::string staffAddress, std::string staffEmail, int s);
     void addMember();
     void saveMemberDataToFile(std::string filename);
@@ -55,6 +57,7 @@ public:
     int getSalary();
     void setPassword(std::string p);
     std::string getPassword();
+    
     //void readDataFromCSV(std::string filename);
 };
 

@@ -225,8 +225,17 @@ void Library::options()
                                 std::string memberDataFile = "member_data.txt";
                             loggedInLibrarian.saveMemberDataToFile(memberDataFile);
                             break;
-                        //case 2:
-                           // loggedInLibrarian.issueBook();
+                        case 2:
+                            int selectedMemberID;
+                            int selectedBookID;
+                            std::cout << "Enter Member ID: " << std::endl;
+                            std::cin  >> selectedMemberID;
+                            std::cout << " Enter Book ID:" << std::endl;
+                            std::cin  >> selectedBookID;
+                            selectedBookID--;
+                            selectedMemberID--;
+                           loggedInLibrarian.issueBook(members[selectedMemberID].getMemberId(), books[selectedBookID].getBookId());
+                           break;
                         // case 3:
                         //     loggedInLibrarian.returnBook();
                         // case 4:

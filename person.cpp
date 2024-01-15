@@ -135,22 +135,22 @@ bool Librarian::isMemberExist(Member member, std::string filename)
 }
  void Librarian::issueBook(int memberId, int bookId){
 
-//     bool failure = true;
-//     for (int i = 0; i < books.size(); i++)
-//     {
-//         if (bookId == books[i].getBookId() && memberId == members[i].getMemberId())
-//         {
-//             std::cout << "Book issued successfully:" << std::endl;
-//             std::cout << "Member ID: " << members[memberId - 1].getMemberId() << ", Member Name: " << members[memberId - 1].getName() << std::endl;
-//             std::cout << "Book ID: " << books[bookId - 1].getBookId() << ", Book Name: " << books[bookId - 1].getBookName() << std::endl;
-//             failure = false;
-//             break;
-//         }
-//     }
-//     if (failure)
-//     {
-//         std::cout << "Member or book not found." << std::endl;
-//     }
+    bool failure = true;
+    for (int i = 0; i < books.size(); i++)
+    {
+        if (bookId == books[i].getBookId() && memberId == members[i].getMemberId())
+        {
+            std::cout << "Book issued successfully:" << std::endl;
+            std::cout << "Member ID: " << members[memberId - 1].getMemberId() << ", Member Name: " << members[memberId - 1].getName() << std::endl;
+            std::cout << "Book ID: " << books[bookId - 1].getBookId() << ", Book Name: " << books[bookId - 1].getBookName() << std::endl;
+            failure = false;
+            break;
+        }
+    }
+    if (failure)
+    {
+        std::cout << "Member or book not found." << std::endl;
+    }
 
  }
 void Librarian::returnBook(int memberId, int bookId)
