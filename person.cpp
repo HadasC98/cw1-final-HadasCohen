@@ -277,22 +277,12 @@ bool Member::returnBook(int bookId) {
 }
 
 
-// void Member::setBooksBorrowed(Book book)
-// {
-//     booksLoaned.push_back(book);
-// }
+void Member::setBooksBorrowed(Book book)
+{
+    booksLoaned.push_back(book);
+}
 
-// Book Member::getBooksBorrowed()
-// {
-//     return booksLoaned;
-// }
+std::vector<Book> Member::getBooksBorrowed(){
+    return booksLoaned;
+}
 
-// // Function to remove a borrowed book
-// void Member::removeBorrowedBook(Book book)
-// {
-//     for(int i = 0; i < booksLoaned.size(); i++){
-//         if(booksLoaned[i] != books[i-1])
-//         booksLoaned.erase(it);
-//     }
-   
-// }

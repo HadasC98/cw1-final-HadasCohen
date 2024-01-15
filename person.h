@@ -73,8 +73,8 @@ public:
     void setMemberId(int mId) ;
     int getMemberId() ;
     bool returnBook(int bookId);
-    // void setBooksBorrowed(Book book);
-    // Book getBooksBorrowed();
+    void setBooksBorrowed(Book book);
+    std::vector<Book> getBooksBorrowed();
     
 };
 
