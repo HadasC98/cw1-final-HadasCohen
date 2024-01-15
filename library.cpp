@@ -245,11 +245,11 @@ void Library::options()
                             selectedBookID--;
                             selectedMemberID--;
                             loggedInLibrarian.returnBook(members[selectedMemberID].getMemberId(), books[selectedBookID].getBookId());
-                        // case 4:
-                            // std::cout << "Enter Member ID: " << std::endl;
-                            // std::cin  >> selectedMemberID;
-                            // selectedMemberID--;
-                        //     loggedInLibrarian.diplayBorrowedBooks(members[selectedMemberID].getMemberId());
+                        case 4:
+                            std::cout << "Enter Member ID: " << std::endl;
+                            std::cin  >> selectedMemberID;
+                            selectedMemberID--;
+                            loggedInLibrarian.diplayBorrowedBooks(members[selectedMemberID].getMemberId());
                         // case 5:
                             // std::cout << "Enter Member ID: " << std::endl;
                             // std::cin  >> selectedMemberID;

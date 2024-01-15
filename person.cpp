@@ -153,9 +153,6 @@ bool Librarian::isMemberExist(Member member, std::string filename)
     }
 
  }
-    
-
-       
 
 void Librarian::returnBook(int memberId, int bookId)
 {
@@ -177,6 +174,24 @@ void Librarian::returnBook(int memberId, int bookId)
    
 void Librarian::diplayBorrowedBooks(int memberId)
 {
+    for ( Member member : members) {
+        if (member.getMemberId() == memberId) {
+            
+            std::vector<Book> booksLoaned = member.getBooksBorrowed();
+
+            if (booksLoaned.empty()) {
+                std::cout << "Member has no borrowed books." << std::endl;
+            } else {
+                std::cout << "Borrowed books by Member ID " << memberId << ":" << std::endl;
+                for (Book book : booksLoaned) {
+                    std::cout << "Book ID: " << book.getBookId() << ", Book Name: " << book.getBookName() << std::endl;
+                }
+            }
+            return;
+        }
+    }
+
+    std::cout << "Member not found." << std::endl;
 }
 void Librarian::calcFine(int memberId)
 {
