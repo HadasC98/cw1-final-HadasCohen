@@ -217,6 +217,9 @@ void Library::options()
                         std::cout << "Enter your choice: ";
                         std::cin >> librarianChoice;
 
+                        int selectedMemberID;
+                        int selectedBookID;
+
                         switch (librarianChoice)
                         {
                         case 1:
@@ -226,8 +229,6 @@ void Library::options()
                             loggedInLibrarian.saveMemberDataToFile(memberDataFile);
                             break;
                         case 2:
-                            int selectedMemberID;
-                            int selectedBookID;
                             std::cout << "Enter Member ID: " << std::endl;
                             std::cin  >> selectedMemberID;
                             std::cout << " Enter Book ID:" << std::endl;
@@ -236,11 +237,23 @@ void Library::options()
                             selectedMemberID--;
                            loggedInLibrarian.issueBook(members[selectedMemberID].getMemberId(), books[selectedBookID].getBookId());
                            break;
-                        // case 3:
-                        //     loggedInLibrarian.returnBook();
+                        case 3:
+                            std::cout << "Enter Member ID: " << std::endl;
+                            std::cin  >> selectedMemberID;
+                            std::cout << " Enter Book ID:" << std::endl;
+                            std::cin  >> selectedBookID;
+                            selectedBookID--;
+                            selectedMemberID--;
+                            loggedInLibrarian.returnBook(members[selectedMemberID].getMemberId(), books[selectedBookID].getBookId());
                         // case 4:
-                        //     loggedInLibrarian.diplayBorrowedBooks();
+                            // std::cout << "Enter Member ID: " << std::endl;
+                            // std::cin  >> selectedMemberID;
+                            // selectedMemberID--;
+                        //     loggedInLibrarian.diplayBorrowedBooks(members[selectedMemberID].getMemberId());
                         // case 5:
+                            // std::cout << "Enter Member ID: " << std::endl;
+                            // std::cin  >> selectedMemberID;
+                            // selectedMemberID--;
                         //     loggedInLibrarian.calcFine();
                         case 27:
                             std::cout << "Press Esc to logout..." << std::endl;

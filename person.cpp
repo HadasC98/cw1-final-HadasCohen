@@ -153,9 +153,28 @@ bool Librarian::isMemberExist(Member member, std::string filename)
     }
 
  }
+    
+
+       
+
 void Librarian::returnBook(int memberId, int bookId)
 {
+     // Find the member and return the book
+    for (Member& member : members) {
+        if (member.getMemberId() == memberId) {
+            if (member.returnBook(bookId)) {
+                std::cout << "Book returned successfully!" << std::endl;
+            } else {
+                std::cout << "Member does not have this book." << std::endl;
+            }
+            return;
+        }
+    }
+
+    std::cout << "Member not found." << std::endl;
+   
 }
+   
 void Librarian::diplayBorrowedBooks(int memberId)
 {
 }
@@ -245,6 +264,16 @@ void Member::setMemberId(int mId)
 int Member::getMemberId()
 {
     return memberId;
+}
+
+bool Member::returnBook(int bookId) {
+        for (int i = 0; i<booksLoaned.size(); i++) {
+            if (bookId == booksLoaned[i].getBookId()) {
+                booksLoaned.erase(booksLoaned.begin() + i);
+                return true; // Book found and returned successfully
+            }
+        }
+        return false; // Book not found in the member's list
 }
 
 

@@ -66,16 +66,15 @@ class Member : public Person
 {
     private:
     int memberId;
-    //std::vector<Book> booksLoaned;
+    std::vector<Book> booksLoaned;
 
 public:
     Member(int id, std::string memberName, std::string memberAddress, std::string memberEmail);
     void setMemberId(int mId) ;
     int getMemberId() ;
+    bool returnBook(int bookId);
     // void setBooksBorrowed(Book book);
     // Book getBooksBorrowed();
-    // // Function to remove a borrowed book
-    // void removeBorrowedBook(Book book);
     
 };
 

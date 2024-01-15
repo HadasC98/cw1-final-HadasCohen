@@ -27,6 +27,7 @@ int Book::getBookId()
 {
     return bookId;
 }
+
 std::string Book::getBookName()
 {
     return bookName;

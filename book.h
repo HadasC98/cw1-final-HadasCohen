@@ -32,6 +32,7 @@ public:
   //void readDataFromCSV(std::string filename);
   void setBookId(int bId);
   int getBookId();
+  //void setAvailable(bool available);
   std::string getBookName();
   std::string getAuthorFirstName();
   std::string getAuthorLastName();
