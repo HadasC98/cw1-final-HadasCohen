@@ -250,11 +250,11 @@ void Library::options()
                             std::cin  >> selectedMemberID;
                             selectedMemberID--;
                             loggedInLibrarian.diplayBorrowedBooks(members[selectedMemberID].getMemberId());
-                        // case 5:
-                            // std::cout << "Enter Member ID: " << std::endl;
-                            // std::cin  >> selectedMemberID;
-                            // selectedMemberID--;
-                        //     loggedInLibrarian.calcFine();
+                        case 5:
+                            std::cout << "Enter Member ID: " << std::endl;
+                            std::cin  >> selectedMemberID;
+                            selectedMemberID--;
+                            loggedInLibrarian.calcFine(members[selectedMemberID].getMemberId());
                         case 27:
                             std::cout << "Press Esc to logout..." << std::endl;
                             break;

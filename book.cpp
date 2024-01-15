@@ -49,39 +49,34 @@ std::chrono::system_clock::time_point Book::getDueDate()
 {
     return dueDate;
 }
-// void Book::borrowBook(Member &borrower, std::chrono::system_clock::time_point newDueDate)
+void Book::setBorrowed(bool borrowed)
+{
+    isBorrowed = borrowed; 
+}
+void Book::returnBook()
+{
+    if (isBorrowed) {
+        isBorrowed = false;
+        std::cout << "Book returned successfully." << std::endl;
+    } else {
+        std::cout << "Error: The book is not checked out." << std::endl;
+    }
+}
+
+// void Book::borrowBook(std::string borrower, std::chrono::system_clock::time_point dueDate)
 // {
-//     // checking if the book can be borrowed
-//     if (!available)
-//     {
-//         std::cout << "Book not available for borrowing." << std::endl;
-//         return;
+//     if (!isBorrowed) {
+//         isBorrowed = true;
+//         this->borrower = std::move(borrower);
+//         this->dueDate = dueDate;
+//         std::cout << "Book borrowed successfully." << std::endl;
+//     } else {
+//         std::cout << "Sorry! Choose a different book: The book is already borrowed." << std::endl;
 //     }
-
-//     available = false;
-//     setDueDate(newDueDate);
-//     borrower.booksLoaned.push_back(this);
-
-//     std::cout << "Book ID " << bookId << " borrowed by Member ID " << borrower.memberId
-//               << " due on " << std::chrono::system_clock::to_time_t(dueDate) << std::endl;
 // }
 
-// // Function to return the book
-// void Book::returnBook()
-// {
-//     if (borrower == nullptr)
-//     {
-//         std::cout << "Book is not currently borrowed." << std::endl;
-//         return;
-//     }
-
-//     available = true;
-//     borrower->removeBorrowedBook(this);
-//     borrower = nullptr;
-
-//     std::cout << "Book ID " << bookId << " returned." << std::endl;
-// }
- Book::Book(int id,std::string bName,std::string aFirstName, std::string aLastName){
+Book::Book(int id, std::string bName, std::string aFirstName, std::string aLastName)
+{
     setBookId(id);
     bookName = bName;
     authorFirstName = aFirstName;

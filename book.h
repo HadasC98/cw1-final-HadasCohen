@@ -25,9 +25,13 @@ private:
   std::string bookType;
   std::chrono::system_clock::time_point dueDate;
   std::string borrower;
+  bool isBorrowed;
+
+
 
 public:
   int pageCount;
+  //Book(int id, std::string bookName) : bookId(id), bookName(std::move(bookName)), isBorrowed(false) {}
   Book(int id,std::string bName,std::string aFirstName, std::string aLastName);
   //void readDataFromCSV(std::string filename);
   void setBookId(int bId);
@@ -39,9 +43,9 @@ public:
   //Function sets due date
   void setDueDate(std::chrono::system_clock::time_point newDueDate);
   std::chrono::system_clock::time_point getDueDate();
-//   void borrowBook(Member &borrower, std::chrono::system_clock::time_point newDueDate);
-//   // Function to return the book
-//   void returnBook();
+  void setBorrowed(bool isBorrowed);
+  void returnBook();
+  //void borrowBook(std::string borrower,std::chrono::system_clock::time_point dueDate);
 };
 
 #endif

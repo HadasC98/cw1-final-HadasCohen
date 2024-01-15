@@ -70,8 +70,8 @@ class Member : public Person
 
 public:
     Member(int id, std::string memberName, std::string memberAddress, std::string memberEmail);
-    void setMemberId(int mId) ;
-    int getMemberId() ;
+    void setMemberId(int mId);
+    int getMemberId();
     bool returnBook(int bookId);
     void setBooksBorrowed(Book book);
     std::vector<Book> getBooksBorrowed();

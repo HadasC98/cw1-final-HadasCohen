@@ -176,7 +176,7 @@ void Librarian::diplayBorrowedBooks(int memberId)
 {
     for ( Member member : members) {
         if (member.getMemberId() == memberId) {
-            
+
             std::vector<Book> booksLoaned = member.getBooksBorrowed();
 
             if (booksLoaned.empty()) {
@@ -195,6 +195,36 @@ void Librarian::diplayBorrowedBooks(int memberId)
 }
 void Librarian::calcFine(int memberId)
 {
+    for (Member member : members) {
+        if (member.getMemberId() == memberId) {
+
+             std::vector<Book> booksLoaned = member.getBooksBorrowed();
+
+            if (booksLoaned.empty()) {
+                std::cout << "Member has no borrowed books. No fine calculation needed." << std::endl;
+            } else {
+                std::chrono::system_clock::time_point currentTime = std::chrono::system_clock::now();
+                int totalFine = 0;
+
+                for (Book book : booksLoaned) {
+                    // Calculate the fine based on due date
+                    std::chrono::duration<int, std::ratio<60*60*24>> daysOverdue =
+                        std::chrono::duration_cast<std::chrono::duration<int, std::ratio<60*60*24>>>(
+                            currentTime - book.getDueDate());
+
+                    if (daysOverdue.count() > 0) {
+                        int finePerDay = 1;  // Change this according to your fine policy
+                        totalFine += daysOverdue.count() * finePerDay;
+                    }
+                }
+
+                std::cout << "Total fine for Member ID " << member.getMemberId() << ": £" << totalFine << std::endl;
+            }
+            return;
+        }
+    }
+
+    std::cout << "Member not found." << std::endl;
 }
 void Librarian::setStaffID(int id)
 {
