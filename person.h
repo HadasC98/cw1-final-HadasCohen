@@ -30,8 +30,6 @@ public:
 };
 
 
-
-
 class Librarian : public Person
 {
 private:
@@ -58,7 +56,6 @@ public:
     void setPassword(std::string p);
     std::string getPassword();
     
-    //void readDataFromCSV(std::string filename);
 };
 
 

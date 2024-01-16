@@ -63,13 +63,7 @@ bool Library::loginLibrarian(int librarianId)
         {
             std::cout << "Login successfull!" << std::endl;
             failure = false;
-            options();
         }
-    }
-    if (failure)
-    {
-        std::cout << "Login failed!" << std::endl;
-        options();
     }
     return failure;
 }
@@ -193,9 +187,8 @@ void Library::options()
             std::cout << "Enter Librarian ID: ";
             std::cin >> librarianId;
 
-            if (mylibrary.loginLibrarian(librarianId))
+            if (!mylibrary.loginLibrarian(librarianId))
             {
-                std::cout << "Login successful!" << std::endl;
                 // Set the loggedInLibrarian to the logged-in librarian
                 loggedInLibrarian = mylibrary.getLibrarianById(librarianId);
 
@@ -262,7 +255,8 @@ void Library::options()
             }
             else
             {
-                std::cout << "Login failed. Incorrect ID or password." << std::endl;
+                std::cout << "Login failed. Incorrect ID." << std::endl;
+                options();
             }
             break;
 
